@@ -45,6 +45,8 @@ class UsersController < ApplicationController
   
   post '/signup' do 
     @user = User.new(params)
+    session[:user_id] = @user.id
+    binding.pry
 
     erb :'users/show', :locals => {:name => params[:name]}
   end
