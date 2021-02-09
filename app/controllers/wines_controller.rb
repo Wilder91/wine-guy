@@ -34,4 +34,13 @@ class WinesController < ApplicationController
   delete "/wines/:id/delete" do
     redirect "/wines"
   end
+
+  get "/wines/new" do 
+    "hello"
+  end
+
+  post "/wines/new" do 
+    #binding.pry
+    erb :"wines/show.html", :locals => {:name => params[:name], :country => params[:country], :varietal => params[:varietal]}
+  end
 end

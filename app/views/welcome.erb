@@ -1,21 +1,15 @@
-<div class="container">
+<div>
   <header><img src="images/WineGuy_BlueBackground.png" class="img-responsive main-image" height="450px"></header>
   <div class="col-md-8 col-md-offset-2">
     <h2>Welcome to Wine Guy!</h2>
 
-    <div class="content">
-      <p>Welcome to Wine Guy! We're here to help you organize and understand your wine buying.</p>
+    <div>
+      <p>If you're a new user, please <b><a href="/signup">sign up</a></b> to start using the app.</p>
+      <p>If you're a returning user, please <b><a href="/login">log in</a></b> to view your data.</p>
+      <p>If you're uninterested in our service, please <b><a href="/goaway">go away</a></p>
     </div>
 
-    <div class="sidebar">
-      <h3>Environment</h3>
-      <ul>
-        <li><b>Ruby:</b> <%= RUBY_VERSION %></li>
-        <li><b>Environment:</b> <%= ENV["RACK_ENV"] %></li>
-        <li><b>Server:</b> <%= @env["SERVER_SOFTWARE"] %></li>
-        <li><b>Port:</b> <%= @env["SERVER_PORT"] %></li>
-      </ul>
-    </div>
+    
     
   </div>
 </div>

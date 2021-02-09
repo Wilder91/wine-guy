@@ -34,4 +34,20 @@ class UsersController < ApplicationController
   delete "/users/:id/delete" do
     redirect "/users"
   end
+
+  get '/signup' do 
+    erb :'users/sign_up'
+  end
+
+  get '/login' do 
+    erb :'users/login'
+  end
+  
+  post '/signup' do 
+    @user = User.new(params)
+
+    erb :'users/show', :locals => {:name => params[:name]}
+  end
+
+  
 end
