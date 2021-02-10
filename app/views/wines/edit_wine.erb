@@ -1,0 +1,32 @@
+<form action="/wines/<%= @wine.id %>" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="patch"/>
+
+  <label for="name">Name: </label>
+  <input type="text" name="name" id="name" value="<%= @wine.name %>"/>
+
+  <br></br>
+
+  <label for="country">Country:  </label>
+  <input type="string" name="country" id="country" value="<%= @wine.country %>"/>
+
+  <br></br>
+
+  <label for="rating">Rating: </label>
+  <input type="text" name="rating" id="rating" value="<%= @wine.rating %>"/>
+
+  <br></br>
+
+  <label for="price">Price:  $</label>
+  <input type="number" name="price" id="price" min="2014-01-01" max="2029-12-31" value="<%= @wine.price %>"/>
+
+  <br></br>
+
+  <label for="varietal">Varietal: </label>
+  <input type="text" name="varietal" id="varietal" value="<%= @wine.varietal %>"/>
+
+  <br></br>
+
+  <input type="submit" value="Update wine"/>
+
+  <br></br>
+</form>

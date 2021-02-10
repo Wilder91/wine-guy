@@ -6,19 +6,28 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "bananas_in_pajamas" #ENV.fetch('SESSION_SECRET')
+    set :session_secret, ENV['SESSION_SECRET']
   end
 
   get "/" do
-    erb :welcome
+    if logged_in?
+      redirect to '/users/show.html'
+    else
+      erb :welcome
+    end
   end
 
   get '/goaway' do 
-    "goodbye "
+    "goodbye"
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id])
+    #binding.pry
+    @current_user ||= User.find_by(params[:id])
+  end
+
+  def logged_in?
+    !!session[:user_id]
   end
 
   

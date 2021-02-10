@@ -2,7 +2,15 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
+    #binding.pry
+    
+    @wines = Wine.all
+    #binding.pry
     erb :"/users/index.html"
+  end
+
+  post "/users/wine_list" do
+    erb :"users/wine_list"
   end
 
   # GET: /users/new
@@ -35,21 +43,40 @@ class UsersController < ApplicationController
     redirect "/users"
   end
 
-  get '/signup' do 
+  get '/signup' do
+    #binding.pry
+    #session.clear
+    
     erb :'users/sign_up'
+    
+  end
+
+  post '/signup' do 
+    #binding.pry
+    @user = current_user
+    #binding.pry
+    erb :'users/show.html'
   end
 
   get '/login' do 
     erb :'users/login'
   end
-  
-  post '/signup' do 
-    @user = User.new(params)
-    session[:user_id] = @user.id
-    binding.pry
 
-    erb :'users/show', :locals => {:name => params[:name]}
+  post '/login' do 
+    #binding.pry
+    @user = current_user
+    #binding.pry
+    #binding.pry
+    erb :'users/show.html'
   end
+
+  get '/logout' do
+      session.clear
+      
+      redirect '/'
+  end
+  
+  
 
   
 end

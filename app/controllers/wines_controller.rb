@@ -1,13 +1,31 @@
 class WinesController < ApplicationController
 
   # GET: /wines
-  get "/wines" do
-    erb :"/wines/index.html"
+  get "/wines/" do
+    #binding.pry
+    @wines = current_user.wines
+    erb :"/wines/"
   end
 
   # GET: /wines/new
   get "/wines/new" do
     erb :"/wines/new.html"
+  end
+
+  post "/wines/new" do 
+    #binding.pry
+    @wine = Wine.new(params)
+    @wine.user_id = session[:user_id]
+    @wine.save
+    @user = current_user
+    
+    erb :"users/index.html", :locals => {:name => params[:name], :country => params[:country], :varietal => params[:varietal]}
+  end
+
+
+  post "/wines/index" do 
+    #binding.pry
+    erb :"wines/index.html"
   end
 
   # POST: /wines
@@ -17,12 +35,28 @@ class WinesController < ApplicationController
 
   # GET: /wines/5
   get "/wines/:id" do
-    erb :"/wines/show.html"
+    erb :"/wines/show_wine.html"
+  end
+
+  post "/wines/:id" do
+    #binding.pry
+    @wine = Wine.find_by(params[:user_id])
+    erb :"/wines/show_wine.html"
   end
 
   # GET: /wines/5/edit
   get "/wines/:id/edit" do
-    erb :"/wines/edit.html"
+    #binding.pry
+    @wine = Wine.find(params[:id])
+    #binding.pry
+    if logged_in? && @wine.user_id == current_user[:id]
+      @wine = Wine.find(params[:id])
+      @user = User.find(session[:user_id])
+      erb :'wines/edit_wine'
+    else
+      redirect to('/login')
+    end
+    
   end
 
   # PATCH: /wines/5
@@ -35,12 +69,5 @@ class WinesController < ApplicationController
     redirect "/wines"
   end
 
-  get "/wines/new" do 
-    "hello"
-  end
-
-  post "/wines/new" do 
-    #binding.pry
-    erb :"wines/show.html", :locals => {:name => params[:name], :country => params[:country], :varietal => params[:varietal]}
-  end
+  
 end
