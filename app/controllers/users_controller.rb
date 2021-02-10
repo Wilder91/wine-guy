@@ -9,6 +9,11 @@ class UsersController < ApplicationController
     erb :"/users/index.html"
   end
 
+  post "/users/index.html" do
+    binding.pry
+    erb :"users/index.html"
+  end
+
   post "/users/wine_list" do
     erb :"users/wine_list"
   end
@@ -54,8 +59,7 @@ class UsersController < ApplicationController
   post '/signup' do 
     #binding.pry
     @user = current_user
-    #binding.pry
-    erb :'users/show.html'
+    erb :'users/user_landing.html'
   end
 
   get '/login' do 
@@ -65,14 +69,12 @@ class UsersController < ApplicationController
   post '/login' do 
     #binding.pry
     @user = current_user
-    #binding.pry
-    #binding.pry
-    erb :'users/show.html'
+    erb :'users/user_landing.html'
   end
 
   get '/logout' do
-      session.clear
-      
+      session.destroy
+      #binding.pry
       redirect '/'
   end
   

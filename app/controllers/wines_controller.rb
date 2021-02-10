@@ -19,7 +19,7 @@ class WinesController < ApplicationController
     @wine.save
     @user = current_user
     
-    erb :"users/index.html", :locals => {:name => params[:name], :country => params[:country], :varietal => params[:varietal]}
+    erb :"users/index.html"
   end
 
 
