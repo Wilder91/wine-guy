@@ -15,11 +15,9 @@ class WinesController < ApplicationController
   post "/wines/new" do 
     #binding.pry
     @wine = Wine.new(params)
-    @wine.user_id = session[:user_id]
-    @wine.save
-    @user = current_user
     
-    erb :"users/index.html"
+    
+    erb :"wines/show_wine.html"
   end
 
 
@@ -33,6 +31,7 @@ class WinesController < ApplicationController
     redirect "/wines"
   end
 
+
   # GET: /wines/5
   get "/wines/:id" do
     erb :"/wines/show_wine.html"
@@ -40,7 +39,7 @@ class WinesController < ApplicationController
 
   post "/wines/:id" do
     #binding.pry
-    @wine = Wine.find_by(params[:user_id])
+    @wine = Wine.new(params)
     erb :"/wines/show_wine.html"
   end
 

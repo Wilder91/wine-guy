@@ -4,13 +4,14 @@ class UsersController < ApplicationController
   get "/users" do
     #binding.pry
     
-    @wines = Wine.all
+    @wines = Wine.find_by(user_id: 2)
+    @user = User.find_by(name: "Jorf Bork")
     #binding.pry
     erb :"/users/index.html"
   end
 
   post "/users/index.html" do
-    binding.pry
+    #binding.pry
     erb :"users/index.html"
   end
 
@@ -58,25 +59,25 @@ class UsersController < ApplicationController
 
   post '/signup' do 
     #binding.pry
-    @user = current_user
+    @user = User.new(params)
+    #binding.pry
+    session[:user_id] = @user_id
     erb :'users/user_landing.html'
   end
-
+  
+  
   get '/login' do 
     erb :'users/login'
-  end
+   end
 
-  post '/login' do 
-    #binding.pry
-    @user = current_user
-    erb :'users/user_landing.html'
-  end
+   post '/login' do 
+       #binding.pry
+       @user = User.find_by(name: params[:username])
+       #binding.pry
+       erb :'users/user_landing.html'
+   end
 
-  get '/logout' do
-      session.destroy
-      #binding.pry
-      redirect '/'
-  end
+  
   
   
 
