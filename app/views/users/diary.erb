@@ -1,0 +1,22 @@
+<h1>This is a list of <%= @user.name %>'s wines:</h1>
+<ul>
+
+<% if @wines.size > 0 %>
+    <% @wines.each do |wine| %>
+      <% if wine.user_id == @user.id %>
+        <li><a href="/wines/<%= wine.id %>/edit"><b><%= wine.name %></b></a> from <%= wine.country %> for $<%= wine.price %></li>
+        <br></br>
+      <% end %>
+    <% end %>
+    <a href="/wines/new">Create new wine</a> <a href="/users/:id"> Return to your profile</a> <a href="/logout">Log out</a> 
+  <% else %>
+    <p>You don't have any recorded wines! <a href="/wines/new">Create a new one here</a>.</p>
+    
+  <% end %>
+
+
+
+    
+    
+    
+    </ul>

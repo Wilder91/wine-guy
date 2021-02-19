@@ -1,0 +1,12 @@
+<%= @user = User.find_by(id: session[:user_id]) %>
+<h1> Hello, <%= @user.name  %>, welcome back!</h1>
+
+<b><a href="/wines/new">Log a new wine</a></b>
+
+<br></br>
+
+<b><a href="/diary">Edit your wine list</a></b>
+
+<br></br>
+
+<b><a href="/logout">Log out</a></b>
