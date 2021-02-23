@@ -1,6 +1,6 @@
 <h1>Edit your wine:</h1>
 
-<form action="/wines/<%= @wine.id %>" method="POST">
+<form action="/wines/<%= @wine.id %>/edit" method="POST">
   <input type="hidden" id="hidden" name="_method" value="patch"/>
 
   <label for="name">Name: </label>
@@ -14,7 +14,7 @@
   <br></br>
 
   <label for="price">Price:  $</label>
-  <input type="number" name="price" id="price" value="<%= @wine.price %>"/>
+  <input type="float" name="price" id="price" value="<%= @wine.price %>"/>
 
   <br></br>
 
@@ -30,13 +30,12 @@
 
   <input type="submit" value="Update Wine"/>
 
-  <form action="/wines/<%= @wine.id %>/delete" method="DELETE">
-  <input type="hidden" id="hidden" name="_method" value="DELETE"/>
-  <input type="submit" value="Delete wine">
-  </form>
+  
 
   <br></br>
 </form>
-<a href = "/users/:id"> Back to User page </a>
-
-<a href = "/wines/delete"> Delete Wine </a>
+<form action="/wines/<%= @wine.id %>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="DELETE"/>
+  <input type="submit" value="Delete wine">
+  </form>
+<a href = "/users/:id"> Return to your profile </a>

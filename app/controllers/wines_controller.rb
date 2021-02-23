@@ -13,7 +13,8 @@ class WinesController < ApplicationController
 
   post "/wines/new" do 
     #binding.pry
-    @wine = Wine.new(params)
+    @wine = Wine.create(params)
+    #binding.pry
     @wine.user_id = session[:user_id]
     @wine.save
     #binding.pry
@@ -30,9 +31,22 @@ class WinesController < ApplicationController
 
   # GET: /wines/5/edit
   get "/wines/:id/edit" do
-    @wine = Wine.find_by(user_id: session[:user_id])
+    #binding.pry
+    @wine = Wine.find_by(id: params[:id])
     #binding.pry
     erb :"/wines/edit.html"
+  end
+
+  post "/wines/:id/edit" do
+    #binding.pry 
+    wine = Wine.find_by(id: params['id'])
+    wine.name = params[:name]
+    wine.country = params[:country]
+    wine.price = params[:price]
+    wine.rating = params[:rating]
+    wine.varietal = params[:varietal]
+    wine.save
+    redirect to '/diary'
   end
 
   # PATCH: /wines/5
@@ -42,9 +56,10 @@ class WinesController < ApplicationController
   end
 
   # DELETE: /wines/5/delete
-  get "/wines/:id/delete" do
-    @wine = Wine.find_by(user_id: session[:user_id])
+  post "/wines/:id/delete" do
+    @wine = Wine.find_by(id: params[:id])
+    #binding.pry
     @wine.destroy
-    redirect to "/users/show.html"
+    redirect to "/diary"
   end
 end

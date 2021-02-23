@@ -1,12 +1,15 @@
-<%= @user = User.find_by(id: session[:user_id]) %>
-<h1> Hello, <%= @user.name  %>, welcome back!</h1>
+<h1> <%= @user.name  %>'s Wine Diary!</h1>
 
-<b><a href="/wines/new">Log a new wine</a></b>
-
-<br></br>
-
-<b><a href="/diary">Edit your wine list</a></b>
+<b><a href="/wines/new">Log A New Wine</a></b>
 
 <br></br>
 
-<b><a href="/logout">Log out</a></b>
+<b><a href="/diary">View Your Wine List</a></b>
+
+<br></br>
+
+<b><a href="/logout">Log Out</a></b>
+
+<br></br>
+
+<b><a href="/users/delete">Delete Your Account</a></b>
