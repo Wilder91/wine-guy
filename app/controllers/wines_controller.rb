@@ -64,6 +64,6 @@ class WinesController < ApplicationController
     @wine = Wine.find_by(id: params[:id])
     #binding.pry
     @wine.destroy
-    redirect to "/diary"
+    redirect to "users/#{current_user.id}/diary"
   end
 end
