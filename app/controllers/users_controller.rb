@@ -41,7 +41,8 @@ class UsersController < ApplicationController
   get "users/delete" do
     #binding.pry 
     @user = User.find_by(id: session[:user_id])
+    binding.pry
     @user.destroy
-    redirect to '/'
+    erb :welcome
   end
 end

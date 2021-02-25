@@ -13,9 +13,11 @@ class ApplicationController < Sinatra::Base
   get "/" do
     #binding.pry
     if logged_in? 
-      erb :"users/show.html"
+      user = current_user
+      redirect to "/users/#{user.id}"
     else
       erb :welcome
+    end
   end
 
   get '/logout' do 
@@ -33,11 +35,10 @@ class ApplicationController < Sinatra::Base
     
     user = User.find_by(email: params[:email])
     #binding.pry
-    if user 
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Logged in"
       redirect to "/users/#{user.id}"
-      
     else 
       flash[:error] = "Username or Password is invalid"
       redirect '/login'
