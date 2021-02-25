@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-    has_many :wines
+    has_many :tickets
+    has_many :wines, through: :tickets
    
     has_secure_password
     validates :name, uniqueness: true

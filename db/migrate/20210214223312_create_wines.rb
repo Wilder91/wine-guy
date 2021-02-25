@@ -6,7 +6,6 @@ class CreateWines < ActiveRecord::Migration[5.2]
       t.float :price
       t.float :rating
       t.string :varietal
-      t.integer :user_id
       t.timestamps null: false
     end
   end

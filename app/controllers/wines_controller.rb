@@ -14,8 +14,9 @@ class WinesController < ApplicationController
   post "/wines/new" do 
     #binding.pry
     wine = Wine.create(params)
+    params["ticket"] = {user_id: user.id, wine_id: wine.id}
+    ticket = Ticket.create(params["ticket"])
     #binding.pry
-    wine.user_id = session[:user_id]
     wine.save
     erb :"/wines/show.html"
   end
