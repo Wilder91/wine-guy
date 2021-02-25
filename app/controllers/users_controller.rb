@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     erb :"users/diary"
   end
 
-  get "users/delete" do
+  post "users/:id/delete" do
     #binding.pry 
     @user = User.find_by(id: session[:user_id])
     binding.pry
