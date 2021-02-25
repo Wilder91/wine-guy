@@ -13,16 +13,15 @@ class UsersController < ApplicationController
       session[:user_id] = user.id 
       redirect to :"/users/#{user.id}"
     else
-      #binding.pry
-      flash[:error] = @user.errors.full_messages.first
+      flash[:error] = user.errors.full_messages.first
       redirect '/signup'
     end
   end
 
   get "/users/:id" do
     #binding.pry
-    params[:id] = session[:user_id]
-    @user = current_user
+    session[:user_id] = params[:id]
+    user = current_user
     erb :"/users/show.html"
   end
 

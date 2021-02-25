@@ -13,12 +13,10 @@ class WinesController < ApplicationController
 
   post "/wines/new" do 
     #binding.pry
-    @wine = Wine.create(params)
+    wine = Wine.create(params)
     #binding.pry
-    @wine.user_id = session[:user_id]
-    @wine.save
-    #binding.pry
-    #binding.pry
+    wine.user_id = session[:user_id]
+    wine.save
     erb :"/wines/show.html"
   end
 

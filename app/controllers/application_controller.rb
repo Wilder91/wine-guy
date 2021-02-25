@@ -33,7 +33,6 @@ class ApplicationController < Sinatra::Base
     if user 
       session[:user_id] = user.id
       flash[:success] = "Logged in"
-      #binding.pry
       redirect to "/users/#{user.id}"
       
     else 
