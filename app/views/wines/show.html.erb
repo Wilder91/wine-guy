@@ -9,5 +9,5 @@ Price: <%= @wine.price %>
 <br></br>
 Varietal: <%= @wine.varietal %> 
 <br></br>
-<a href = "/diary"> View All Of Your Entries </a> <a href = "/users/:id"> Back to User Page </a>   <b><a href="/logout">Log Out</a></b>
+<a href = "<%= /users/#{current_user.id} %>diary"> View All Of Your Entries </a> <a href = "/users/<%= current_user.id %>"> Back to User Page </a>   <b><a href="/logout">Log Out</a></b>
 </ul>

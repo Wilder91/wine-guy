@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if user.valid? 
       flash[:success] = "Successful signup"
       session[:user_id] = user.id 
-      redirect to :"/users/#{user.id}"
+      redirect to "/users/#{user.id}"
     else
       flash[:error] = user.errors.full_messages.first
       redirect '/signup'
@@ -24,26 +24,38 @@ class UsersController < ApplicationController
       erb :"/users/show.html"
     else
       #binding.pry 
-      erb :"/users/invalid"
+      redirect to ":/users/invalid"
     end
   end
 
   get "/users/:id/edit" do
-    user = current_user
-    erb :"/users/edit.html"
+    if params[:id].to_i == session[:user_id]
+      erb :"/users/edit.html"
+    else 
+      redirect to "/users/invalid"
+    end
   end
 
-  get "/diary" do 
-    binding.pry
-    @wines = current_wine
-    erb :"users/diary"
+  
+
+  get "/users/:id/diary" do 
+    if params[:id].to_i == session[:user_id]
+      @wines = current_user.wines
+      erb :"users/diary"
+    else 
+      redirect to "/users/invalid"
+    end
   end
 
-  post "users/:id/delete" do
+  post "/users/:id/delete" do
     #binding.pry 
     @user = User.find_by(id: session[:user_id])
-    binding.pry
+    #binding.pry
     @user.destroy
     erb :welcome
+  end
+
+  get "/users/invalid" do 
+    erb :"users/invalid"
   end
 end

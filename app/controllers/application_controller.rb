@@ -57,6 +57,18 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
 
+    def redirect_if_logged_in 
+      if logged_in?
+        redirect to "/users/#{current_user.id}"
+      end
+    end
+
+    def redirect_if_not_logged_in
+      if !logged_in? 
+        redirect to "/login"
+      end
+    end
+
     def current_tickets  
       @current_tickets ||= Ticket.where(user_id: session[:user_id])
     end

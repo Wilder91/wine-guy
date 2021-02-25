@@ -13,18 +13,23 @@ class WinesController < ApplicationController
 
   post "/wines/new" do 
     #binding.pry
-    @wine = Wine.create(params)
-    params["ticket"] = {user_id: current_user.id, wine_id: @wine.id}
-    ticket = Ticket.create(params["ticket"])
+    redirect_if_not_logged_in
+    wine = Wine.create(params)
+    hash = {user_id: current_user.id, wine_id: wine.id}
+    ticket = Ticket.create(hash)
     #@wine.user_id = session[user_id]
-    @wine.save
-    erb :"/wines/show.html"
+    if wine.valid? 
+      redirect "/wines/#{wine.id}"
+    else 
+      flash[:error] = wine.errors.full_messages.to_sentence
+      redirect to "/wines/new"
+    end
   end
 
 
   # GET: /wines/5
   get "/wines/:id" do
-    
+    @wine = Wine.find_by(id: params[:id])
     erb :"/wines/show.html"
   end
 
