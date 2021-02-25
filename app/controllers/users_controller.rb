@@ -2,16 +2,16 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/signup" do
-    erb :"/users/new.html"
+    erb :"/users/signup.html"
     #binding.pry
   end
 
   post "/signup" do
-    @user = User.create(params)
-    if @user.valid? 
+    user = User.create(params)
+    if user.valid? 
       flash[:success] = "Successful signup"
-      session[:user_id] = @user.id 
-      erb :"/users/show.html"
+      session[:user_id] = user.id 
+      redirect to :"/users/#{user.id}"
     else
       #binding.pry
       flash[:error] = @user.errors.full_messages.first
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id" do
+    #binding.pry
     params[:id] = session[:user_id]
     @user = current_user
     erb :"/users/show.html"

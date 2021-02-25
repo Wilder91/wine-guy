@@ -28,12 +28,18 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do 
     
-    @user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:email])
     #binding.pry
-    session[:user_id] = @user.id
-    #binding.pry
-    erb :"users/show.html"
-
+    if user 
+      session[:user_id] = user.id
+      flash[:success] = "Logged in"
+      #binding.pry
+      redirect to "/users/#{user.id}"
+      
+    else 
+      flash[:error] = "Username or Password is invalid"
+      redirect '/login'
+    end
   end
 
   
