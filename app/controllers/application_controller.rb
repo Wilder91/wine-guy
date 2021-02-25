@@ -12,7 +12,10 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     #binding.pry
-    erb :welcome
+    if logged_in? 
+      erb :"users/show.html"
+    else
+      erb :welcome
   end
 
   get '/logout' do 

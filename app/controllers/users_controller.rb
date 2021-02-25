@@ -20,9 +20,12 @@ class UsersController < ApplicationController
 
   get "/users/:id" do
     #binding.pry
-    session[:user_id] = params[:id]
-    user = current_user
-    erb :"/users/show.html"
+    if params[:id].to_i == session[:user_id]
+      erb :"/users/show.html"
+    else
+      #binding.pry 
+      erb :"/users/invalid"
+    end
   end
 
   get "/users/:id/edit" do
