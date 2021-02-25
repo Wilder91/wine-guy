@@ -12,6 +12,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     #binding.pry
+    redirect_if_logged_in
     if logged_in? 
       user = current_user
       redirect to "/users/#{user.id}"
@@ -26,6 +27,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do 
+    redirect_if_logged_in
     #binding.pry
     erb :"users/login"
 

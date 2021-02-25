@@ -11,7 +11,7 @@
       $<%= wine.price %></li>
       <br></br>
       <% end %>
-    <a href="/wines/new">Log A New Wine </a> <a href="/users/:id"> Return To Your Profile </a> <a href="/logout"> Log Out </a> 
+    <a href="/wines/new">Log A New Wine </a> <a href="/users/<%= current_user.id %>"> Return To Your Profile </a> <a href="/logout"> Log Out </a> 
   <% else %>
     <p>You don't have any recorded wines! <a href="/wines/new">Record your first here</a>.</p>
     <a href="/users/show">Return to Homepage</a></b> </p>

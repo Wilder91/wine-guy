@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
+    redirect_if_logged_in
     user = User.create(params)
     if user.valid? 
       flash[:success] = "Successful signup"
@@ -22,9 +23,8 @@ class UsersController < ApplicationController
     #binding.pry
     if params[:id].to_i == session[:user_id]
       erb :"/users/show.html"
-    else
-      #binding.pry 
-      redirect to ":/users/invalid"
+    else 
+      redirect to "/invalid"
     end
   end
 
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if params[:id].to_i == session[:user_id]
       erb :"/users/edit.html"
     else 
-      redirect to "/users/invalid"
+      redirect to "/invalid"
     end
   end
 
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       @wines = current_user.wines
       erb :"users/diary"
     else 
-      redirect to "/users/invalid"
+      redirect to "/invalid"
     end
   end
 
@@ -55,7 +55,8 @@ class UsersController < ApplicationController
     erb :welcome
   end
 
-  get "/users/invalid" do 
+  get "/invalid" do
+    #binding.pry 
     erb :"users/invalid"
   end
 end
