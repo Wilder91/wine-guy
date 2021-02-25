@@ -57,9 +57,12 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
 
-    def current_wine
-      @current_wine ||= Wine.where(user_id: session[:user_id])
+    def current_tickets  
+      @current_tickets ||= Ticket.where(user_id: session[:user_id])
     end
   end
 
+  
+    
+    
 end

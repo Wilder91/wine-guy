@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   end
 
   get "/diary" do 
+    binding.pry
     @wines = current_wine
     erb :"users/diary"
   end
