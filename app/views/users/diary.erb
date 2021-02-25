@@ -4,8 +4,8 @@
 
 <ul>
 
-<% if @wines != [] && @wines != nil %>
-    <% @wines.each do |wine| %>
+<% if current_wine != [] && current_wine != nil %>
+    <% current_wine.each do |wine| %>
       <li><a href="/wines/<%= wine.id %>/edit"><b><%= wine.name %></b></a> 
       <br></br>  
       $<%= wine.price %></li>

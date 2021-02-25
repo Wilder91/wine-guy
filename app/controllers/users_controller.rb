@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       erb :"/users/show.html"
     else
       #binding.pry
-      flash[:error] = "Error signing you up"
+      flash[:error] = @user.errors.full_messages.first
       redirect '/signup'
     end
   end
@@ -31,10 +31,7 @@ class UsersController < ApplicationController
   end
 
   get "/diary" do 
-    #binding.pry
-    
     @wines = current_wine
-    #binding.pry
     erb :"users/diary"
   end
 
