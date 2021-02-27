@@ -1,3 +1,7 @@
 <h1> You are not welcome here </h1>
 <br></br>
+<% if logged_in? %>
 <a href = "/"> Return to your user page </a> <b><a href="/logout">Log Out</a></b>
+<% else %>
+<a href = "/"> Return to Homepage </a>
+<% end%>

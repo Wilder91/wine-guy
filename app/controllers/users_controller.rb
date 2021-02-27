@@ -48,11 +48,12 @@ class UsersController < ApplicationController
   end
 
   post "/users/:id/delete" do
-    #binding.pry 
-    @user = User.find_by(id: session[:user_id])
-    #binding.pry
-    @user.destroy
+    if params[:id].to_i == session[:user_id]
+      @user = User.find_by(id: session[:user_id])
+      #binding.pry
+      @user.destroy
     erb :welcome
+    end
   end
 
   get "/invalid" do

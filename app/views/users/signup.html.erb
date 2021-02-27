@@ -1,8 +1,4 @@
-<% if flash[:error] %>
-    <div class="errors flash fatal">
-        <h4 class="error"><%= flash[:error] %></h4>
-    </div>
-<% end %>
+
 
 <h1>Please fill out the form to join the team:</h1>
 
@@ -29,6 +25,11 @@
   <input type="submit" value="Sign Up"/>
 
   <br></br>
+  <% if flash[:error] %>
+    <div class="errors flash fatal">
+        <h4 class="error"><%= flash[:error] %></h4>
+    </div>
+<% end %>
 
   <a href="/">Return to Homepage</a></b> </p>
 </form>

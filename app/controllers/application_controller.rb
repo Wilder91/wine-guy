@@ -42,7 +42,7 @@ class ApplicationController < Sinatra::Base
       flash[:success] = "Logged in"
       redirect to "/users/#{user.id}"
     else 
-      flash[:error] = "Username or Password is invalid"
+      flash[:error] = "Invalid Email or Password"
       redirect '/login'
     end
   end

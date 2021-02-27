@@ -88,6 +88,11 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+
+  .error{
+    color: red;
+    font-size: medium;
+  }
 }
 
 @media screen and (max-width: 600px) {
