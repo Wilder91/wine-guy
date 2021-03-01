@@ -34,8 +34,8 @@
 
   <br></br>
 </form>
-<form action="/wines/<%= @wine.id %>/delete" method="POST">
-  <input type="hidden" id="hidden" name="_method" value="DELETE"/>
-  <input type="submit" value="Delete wine">
+<form action="/wines/<%= @wine.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete wine?">
   </form>
 <a href = "/users/<%= current_user.id %>"> Return to your profile </a>

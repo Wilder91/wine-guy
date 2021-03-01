@@ -93,6 +93,10 @@
     color: red;
     font-size: medium;
   }
+
+  .green{
+    color: green;
+  }
 }
 
 @media screen and (max-width: 600px) {

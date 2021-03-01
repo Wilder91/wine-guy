@@ -35,7 +35,6 @@ class WinesController < ApplicationController
 
   # GET: /wines/5/edit
   get "/wines/:id/edit" do
-    #binding.pry
     @wine = Wine.find_by(id: params[:id])
     #binding.pry
     erb :"/wines/edit.html"
@@ -50,7 +49,7 @@ class WinesController < ApplicationController
     wine.rating = params[:rating]
     wine.varietal = params[:varietal]
     wine.save
-    redirect to '/diary'
+    redirect to "users/#{current_user.id}/diary"
   end
 
   # PATCH: /wines/5
@@ -61,9 +60,22 @@ class WinesController < ApplicationController
 
   # DELETE: /wines/5/delete
   post "/wines/:id/delete" do
+    #binding.pry
     @wine = Wine.find_by(id: params[:id])
     #binding.pry
-    @wine.destroy
+    if @wine 
+      @ticket = Ticket.find_by(wine_id: @wine.id)
+      @wine.destroy
+      @ticket.destroy
+    else 
+      redirect to '/invalid'
+    end
     redirect to "users/#{current_user.id}/diary"
+  end
+
+  get "/list" do
+    redirect_if_not_logged_in
+    #binding.pry
+    erb :"/wines/list"
   end
 end
