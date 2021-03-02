@@ -76,6 +76,7 @@ class WinesController < ApplicationController
     # DELETE: /wines/5/delete
   post "/wines/:id/delete" do
     wine = Wine.find_by(id: params[:id])
+    #binding.pry
     if wine 
       ticket = Ticket.find_by(wine_id: wine.id, user_id: current_user.id)
       ticket.destroy
@@ -91,11 +92,19 @@ class WinesController < ApplicationController
     erb :"/wines/list"
   end
 
-  post "/like/:id" do 
+  post "/wines/:id/like" do 
     #binding.pry
     wine = Wine.find_by(id: params[:id])
     hash = {user_id: current_user.id, wine_id: wine.id}
     Ticket.create(hash)
-    redirect to "users/#{current_user.id}/diary"
+    redirect to "/list"
+  end
+
+  post '/wines/:id/unlike' do 
+    #binding.pry
+    wine = Wine.find_by(id: params[:id])
+    ticket = Ticket.find_by(user_id: current_user.id, wine_id: wine.id)
+    ticket.destroy
+    redirect to "/list"
   end
 end

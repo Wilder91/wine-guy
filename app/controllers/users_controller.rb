@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   
 
   get "/users/:id/diary" do
-    
+    #binding.pry
     if params[:id].to_i == session[:user_id]
       @wines = current_user.wines
       erb :"users/diary"

@@ -8,7 +8,7 @@
     <% @wines.each do |wine| %>
       <li><a href="/wines/<%= wine.id %>/edit"><b><%= wine.name %> <%= wine.varietal %></b></a> 
       <br></br>  
-      <%= wine.country %></li>
+      <%= wine.country %>  
       <br></br>
       <% end %>
     <a href="/wines/new">Log A New Wine </a> <a href="/users/<%= current_user.id %>"> Return To Your Profile </a> <a href="/logout"> Log Out </a> 
@@ -17,10 +17,4 @@
     <a href="/">Return to Homepage</a></b> </p>
     
   <% end %>
-
-
-
-    
-    
-    
-    </ul>
+</ul>

@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
     validates :name, presence: true
     validates :email, uniqueness: true, presence: true, format: {with: /\A(?<username>[^@\s]+)@((?<domain_name>[-a-z0-9]+)\.(?<domain>[a-z]{2,}))\z/i}
     validates :password, confirmation: true
-    validates :dob, presence: true
+    
 end
