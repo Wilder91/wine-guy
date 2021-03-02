@@ -49,7 +49,8 @@ class WinesController < ApplicationController
   get "/wines/:id/edit" do
     redirect_if_not_logged_in
     @wine = Wine.find_by(id: params[:id])
-    if @wine
+    @ticket = Ticket.find_by(user_id: current_user.id, wine_id: @wine.id)
+    if @wine && @ticket
       erb :"/wines/edit.html"
     else 
       redirect to 'invalid'
@@ -60,12 +61,14 @@ class WinesController < ApplicationController
     #binding.pry 
   
     wine = Wine.find_by(id: params['id'])
+    ticket = Ticket.find_by(user_id: current_user.id, wine_id: wine.id)
     wine.name = params[:name]
     wine.country = params[:country]
-    wine.price = params[:price]
-    wine.rating = params[:rating]
+    ticket.price = params[:price]
+    ticket.rating = params[:rating]
     wine.varietal = params[:varietal]
     wine.save
+    ticket.save
     redirect to "users/#{current_user.id}/diary"
    
   end

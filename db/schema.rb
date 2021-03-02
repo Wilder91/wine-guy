@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 2021_02_14_223316) do
   create_table "tickets", force: :cascade do |t|
     t.integer "user_id"
     t.integer "wine_id"
+    t.float "price"
+    t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,8 +33,6 @@ ActiveRecord::Schema.define(version: 2021_02_14_223316) do
   create_table "wines", force: :cascade do |t|
     t.string "name"
     t.string "country"
-    t.float "price"
-    t.float "rating"
     t.string "varietal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
