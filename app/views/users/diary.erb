@@ -6,15 +6,15 @@
 
 <% if  @wines != [] && @wines != nil %>
     <% @wines.each do |wine| %>
-      <li><a href="/wines/<%= wine.id %>/edit"><b><%= wine.name %></b></a> 
+      <li><a href="/wines/<%= wine.id %>/edit"><b><%= wine.name %> <%= wine.varietal %></b></a> 
       <br></br>  
-      $<%= wine.price %></li>
+      <%= wine.country %></li>
       <br></br>
       <% end %>
     <a href="/wines/new">Log A New Wine </a> <a href="/users/<%= current_user.id %>"> Return To Your Profile </a> <a href="/logout"> Log Out </a> 
   <% else %>
     <p>You don't have any recorded wines! <a href="/wines/new">Record your first here</a>.</p>
-    <a href="/users/show">Return to Homepage</a></b> </p>
+    <a href="/">Return to Homepage</a></b> </p>
     
   <% end %>
 

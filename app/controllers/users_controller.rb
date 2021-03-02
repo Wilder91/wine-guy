@@ -2,12 +2,12 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/signup" do
+    redirect_if_logged_in
     erb :"/users/signup.html"
     #binding.pry
   end
 
   post "/signup" do
-    redirect_if_logged_in
     user = User.create(params)
     if user.valid? 
       flash[:success] = "Successful signup"
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id" do
-    #binding.pry
+    redirect_if_not_logged_in
     if params[:id].to_i == session[:user_id]
       erb :"/users/show.html"
     else 
@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id/edit" do
+    redirect_if_not_logged_in
     if params[:id].to_i == session[:user_id]
       erb :"/users/edit.html"
     else 
@@ -38,7 +39,8 @@ class UsersController < ApplicationController
 
   
 
-  get "/users/:id/diary" do 
+  get "/users/:id/diary" do
+    
     if params[:id].to_i == session[:user_id]
       @wines = current_user.wines
       erb :"users/diary"

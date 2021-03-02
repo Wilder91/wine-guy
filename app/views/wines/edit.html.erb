@@ -36,6 +36,6 @@
 </form>
 <form action="/wines/<%= @wine.id %>/delete" method="post">
   <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete wine?">
+  <input type="submit" value="Remove Wine From Your Library">
   </form>
-<a href = "/users/<%= current_user.id %>"> Return to your profile </a>
+<a href = "/users/<%= current_user.id %>"> Return To Your Profile </a>

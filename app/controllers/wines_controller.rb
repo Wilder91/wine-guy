@@ -2,11 +2,13 @@ class WinesController < ApplicationController
 
   # GET: /wines
   get "/wines" do
+    redirect_if_not_logged_in
     erb :"/wines/index.html"
   end
 
   # GET: /wines/new
   get "/wines/new" do
+    redirect_if_not_logged_in
     #binding.pry
     erb :"/wines/new.html"
   end
@@ -29,19 +31,34 @@ class WinesController < ApplicationController
 
   # GET: /wines/5
   get "/wines/:id" do
+    redirect_if_not_logged_in
     @wine = Wine.find_by(id: params[:id])
-    erb :"/wines/show.html"
+    if @wine
+      erb :"/wines/show.html"
+    else 
+      redirect to '/invalid'
+    end
   end
 
-  # GET: /wines/5/edit
-  get "/wines/:id/edit" do
-    @wine = Wine.find_by(id: params[:id])
+  post "/wines/:id" do
+    redirect to 'users/:id/wine_list'
     #binding.pry
-    erb :"/wines/edit.html"
+  end
+
+  
+  get "/wines/:id/edit" do
+    redirect_if_not_logged_in
+    @wine = Wine.find_by(id: params[:id])
+    if @wine
+      erb :"/wines/edit.html"
+    else 
+      redirect to 'invalid'
+    end
   end
 
   post "/wines/:id/edit" do
     #binding.pry 
+  
     wine = Wine.find_by(id: params['id'])
     wine.name = params[:name]
     wine.country = params[:country]
@@ -50,23 +67,15 @@ class WinesController < ApplicationController
     wine.varietal = params[:varietal]
     wine.save
     redirect to "users/#{current_user.id}/diary"
+   
   end
 
-  # PATCH: /wines/5
-  post "/wines/:id" do
-    redirect to 'users/:id/wine_list'
-    #binding.pry
-  end
-
-  # DELETE: /wines/5/delete
+    # DELETE: /wines/5/delete
   post "/wines/:id/delete" do
-    #binding.pry
-    @wine = Wine.find_by(id: params[:id])
-    #binding.pry
-    if @wine 
-      @ticket = Ticket.find_by(wine_id: @wine.id)
-      @wine.destroy
-      @ticket.destroy
+    wine = Wine.find_by(id: params[:id])
+    if wine 
+      ticket = Ticket.find_by(wine_id: wine.id, user_id: current_user.id)
+      ticket.destroy
     else 
       redirect to '/invalid'
     end
@@ -75,7 +84,15 @@ class WinesController < ApplicationController
 
   get "/list" do
     redirect_if_not_logged_in
-    #binding.pry
+    
     erb :"/wines/list"
+  end
+
+  post "/like/:id" do 
+    #binding.pry
+    wine = Wine.find_by(id: params[:id])
+    hash = {user_id: current_user.id, wine_id: wine.id}
+    Ticket.create(hash)
+    redirect to "users/#{current_user.id}/diary"
   end
 end

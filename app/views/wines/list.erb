@@ -1,8 +1,16 @@
 <h1>List of All Wines:</h1>
 
 <ul><% Wine.all.each do |wine| %>
-    <li><%= wine.name %> <%= wine.varietal %> added by: <%= wine.user%>
-    <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+    <%= wine.name %> <%= wine.varietal %> added by: 
+        
+        
+        
+        
+        
+        <form action="/like/<%= wine.id %>" method="post">
+        <input type="submit" name="addwine" value="Add Wine to Diary" />
+    </form>
     <br></br>
     <% end %>
+    <a href="/">Return to Homepage</a>
 </ul>
