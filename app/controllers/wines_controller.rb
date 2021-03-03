@@ -79,7 +79,7 @@ class WinesController < ApplicationController
   end
 
   get "/list" do
-    redirect_if_not_logged_ins
+    redirect_if_not_logged_in
     @wines = Wine.all.sort_by {|v| v["name"]}
      
     erb :"/wines/list"
