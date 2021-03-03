@@ -1,23 +1,45 @@
-<h1>List of All Wines:</h1>
+<h1>All Wines Logged by Wine Guy Users</h1>
 
-<ul><% Wine.all.each do |wine| %>
+<ul><% @wines.each do |wine| %>
     <%= wine.name %> <%= wine.varietal %>
         
     <% if current_user.wines.include?(wine) %>  
+        
         <form action="/wines/<%= wine.id %>/unlike" method="post">
+        
         <button onclick= href="/wines/:id/unlike">
+        
         Unlike
+        
         </button>
+        
         </form>
+        
+        <% if flash[:success] %>
+        
+        <div class="errors flash fatal">
+        
+        <h4 class="error"><%= "" %></h4>
+    </div>
+    
+    <% end %>
+    
     <% else %>
+    
         <form action="/wines/<%= wine.id %>/like" method="post">
-            <button onclick= href="/wines/:id/like">
-            Like
-            </button>
-            </form> 
+    
+        <button onclick= href="/wines/:id/like">
+        
+        Like
+        
+        </button>
+        
+        </form> 
     <% end %>
         
     <br></br>
+    
     <% end %>
+    
     <a href="/">Return to Homepage</a>
 </ul>

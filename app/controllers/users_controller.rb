@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
 
-  # GET: /users/new
   get "/signup" do
     redirect_if_logged_in
     erb :"/users/signup.html"
-    #binding.pry
   end
 
   post "/signup" do
@@ -40,7 +38,6 @@ class UsersController < ApplicationController
   
 
   get "/users/:id/diary" do
-    #binding.pry
     if params[:id].to_i == session[:user_id]
       @wines = current_user.wines
       erb :"users/diary"
@@ -52,7 +49,6 @@ class UsersController < ApplicationController
   post "/users/:id/delete" do
     if params[:id].to_i == session[:user_id]
       @user = User.find_by(id: session[:user_id])
-      #binding.pry
       @user.destroy
     erb :welcome
     end

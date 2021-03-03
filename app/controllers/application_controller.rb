@@ -11,8 +11,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    #binding.pry
     redirect_if_logged_in
+    
     erb :welcome
   end
 
@@ -23,15 +23,13 @@ class ApplicationController < Sinatra::Base
 
   get '/login' do 
     redirect_if_logged_in
-    #binding.pry
+     
     erb :"users/login"
 
   end
 
   post '/login' do 
-    
     user = User.find_by(email: params[:email])
-    #binding.pry
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Logged in"
@@ -45,7 +43,6 @@ class ApplicationController < Sinatra::Base
   
 
   helpers do
-    
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) 
     end
@@ -64,10 +61,6 @@ class ApplicationController < Sinatra::Base
       if !logged_in? 
         redirect to "/"
       end
-    end
-
-    def current_tickets  
-      @current_tickets ||= Ticket.where(user_id: session[:user_id])
     end
   end
 
